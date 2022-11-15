@@ -52,9 +52,15 @@ public class MovieController {
         movieService.deleteMovieById(id);
     }
 
-    @PutMapping("/updateMovie/{id}")
+    @PutMapping("/updateMovieById/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Movie updateMovieById(@RequestBody Movie movie, @PathVariable Integer id){
-        return movieService.updateMovie(movie, id);
+        return movieService.updateMovieById(movie, id);
+    }
+
+    @PutMapping("/updateMovieByName/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public Movie updateMovieByName(@RequestBody Movie movie, @PathVariable String name){
+        return movieService.updateMovieByName(movie, name);
     }
 }

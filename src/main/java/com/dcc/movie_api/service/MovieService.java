@@ -40,8 +40,17 @@ public class MovieService {
     }
 
     @PutMapping
-    public Movie updateMovie(Movie movie, Integer id){
+    public Movie updateMovieById(Movie movie, Integer id){
         Movie movieToUpdate = movieRepository.findById(id).orElse(null);
+        movieToUpdate.setDirector(movie.getDirector());
+        movieToUpdate.setGenre(movie.getGenre());
+        movieToUpdate.setName(movie.getName());
+        return movieRepository.save(movieToUpdate);
+    }
+
+    @PutMapping
+    public Movie updateMovieByName(Movie movie, String name){
+        Movie movieToUpdate = movieRepository.findByName(name).stream().findFirst().orElse(null);
         movieToUpdate.setDirector(movie.getDirector());
         movieToUpdate.setGenre(movie.getGenre());
         movieToUpdate.setName(movie.getName());

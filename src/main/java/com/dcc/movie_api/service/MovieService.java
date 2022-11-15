@@ -4,6 +4,7 @@ import com.dcc.movie_api.data.Movie;
 import com.dcc.movie_api.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 
@@ -32,6 +33,19 @@ public class MovieService {
 
     public List<Movie> getByName(String name){
         return movieRepository.findByName(name);
+    }
+
+    public void deleteMovieById(Integer id){
+        movieRepository.deleteById(id);
+    }
+
+    @PutMapping
+    public Movie updateMovie(Movie movie, Integer id){
+        Movie movieToUpdate = movieRepository.findById(id).orElse(null);
+        movieToUpdate.setDirector(movie.getDirector());
+        movieToUpdate.setGenre(movie.getGenre());
+        movieToUpdate.setName(movie.getName());
+        return movieRepository.save(movieToUpdate);
     }
 
 }

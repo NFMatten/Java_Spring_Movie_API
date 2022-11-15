@@ -17,26 +17,31 @@ public class MovieController {
     private MovieService movieService;
 
     @PostMapping("/addMovie")
+    @ResponseStatus(HttpStatus.CREATED)
     public Movie addMovie(@RequestBody Movie movie){
         return movieService.saveMovie(movie);
     }
 
     @GetMapping("/movies")
+    @ResponseStatus(HttpStatus.OK)
     public List<Movie> findAllMovies(){
         return movieService.getAllMovies();
     }
 
     @GetMapping("/movies/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Movie findMovieById(@PathVariable Integer id){
         return movieService.getById(id);
     }
 
     @GetMapping("/findByGenre/{genre}")
+    @ResponseStatus(HttpStatus.OK)
     public List<Movie> findMovieByGenre(@PathVariable String genre){
         return movieService.getByGenre(genre);
     }
 
     @GetMapping("/findByName/{name}")
+    @ResponseStatus(HttpStatus.OK)
     public List<Movie> findMovieByName(@PathVariable String name){
         return movieService.getByName(name);
     }
@@ -48,6 +53,7 @@ public class MovieController {
     }
 
     @PutMapping("/updateMovie/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Movie updateMovieById(@RequestBody Movie movie, @PathVariable Integer id){
         return movieService.updateMovie(movie, id);
     }
